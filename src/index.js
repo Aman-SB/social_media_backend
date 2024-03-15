@@ -6,18 +6,19 @@ dotenv.config({
 });
 
 connectDb()
+  .then(() => {
+    app.on("Error || " , (error) => {
+        console.log('Error in MONGOOSE CONNECTION || ' , error);
+        throw error;
+    })
 
-
-
-
-
-
-
-
-
-
-
-
+    app.listen(process.env.PORT || 8000 , () => {
+        console.log(`Server is runing at port : ${process.env.PORT}`)
+    })
+  })
+  .catch((err) => {
+    console.log("Monogo Db connection failed || ", err);
+  });
 
 
 
